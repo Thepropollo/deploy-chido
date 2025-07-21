@@ -1,15 +1,36 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs "Node18" // Asume que tienes configurada una instalación llamada "Node18" en Jenkins
+    }
+
     stages {
-        stage('Construir Imagen Docker') {
+        stage('Instalar dependencias') {
             steps {
-                // Ahora usará el Docker moderno de tu máquina, con BuildKit activo por defecto
+                sh 'npm install'
+            }
+        }
+
+        stage('Ejecutar tests') {
+            steps {
+                sh 'npm test'
+            }
+        }
+
+        stage('Construir Imagen Docker') {
+            when {
+                expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' }
+            }
+            steps {
                 sh 'docker build -t hola-mundo-node:latest .'
             }
         }
 
         stage('Ejecutar Contenedor Node.js') {
+            when {
+                expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' }
+            }
             steps {
                 sh '''
                     docker stop hola-mundo-node || true

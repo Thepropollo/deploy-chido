@@ -1,23 +1,5 @@
-# deploy-chido
+##Construir imagen Docker:
+docker build -t hola-mundo-node:latest .
 
-Aplicacion Node.js con Express para una API simple de usuarios.
-
-## Getting Started
-
-Instala dependencias con:
-
-```bash
-npm install
-```
-
-## Build and Test
-
-Ejecuta la suite de pruebas con:
-
-```bash
-npm test
-```
-
-## Contribute
-
-Haz cambios en una rama, ejecuta las pruebas y abre un pull request.
+##Ejecutar:
+docker run -d --name hola-mundo-node -p 3000:3000 hola-mundo-node:latest
