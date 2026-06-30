@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     tools {
-        nodejs "Node" // Configura una instalación de Node.js en Jenkins
-        dockerTool "docker1" // Cambia el nombre de la herramienta según tu configuración en Jenkins
+        nodejs "Node" // Tu instalación de Node.js configurada en Jenkins
+        docker "docker1" // <--- CAMBIO AQUÍ: Usa 'docker' en minúsculas y el nombre de tu herramienta
     }
 
     stages {
