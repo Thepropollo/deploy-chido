@@ -8,6 +8,9 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 COPY index.js .
 
+# Desactivar la verificación estricta de SSL temporalmente por el certificado vencido de Nexus
+RUN npm config set strict-ssl false
+
 # Instalar dependencias
 RUN npm install
 
