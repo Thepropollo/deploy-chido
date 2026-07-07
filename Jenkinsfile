@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs "Node" // Configura una instalación de Node.js en Jenkins
-        dockerTool 'docker1'  // Cambia el nombre de la herramienta según tu configuración en Jenkins
+    environment {
+        // Obliga al cliente de Jenkins a comunicarse usando la versión de API compatible
+        DOCKER_API_VERSION = '1.29'
     }
 
     stages {
@@ -16,7 +16,7 @@ pipeline {
         stage('Ejecutar Contenedor Node.js') {
             steps {
                 sh '''
-                    # Detener y eliminar cualquier contenedor previo
+                    # Detener y eliminar cualquier contenedor previo para evitar conflictos de nombre/puerto
                     docker stop hola-mundo-node || true
                     docker rm hola-mundo-node || true
 
