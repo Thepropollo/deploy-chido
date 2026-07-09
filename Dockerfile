@@ -8,6 +8,9 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 COPY index.js .
 
+# FIX: Decirle a npm que no se ponga estricto con el certificado autofirmado de Nexus
+RUN npm config set strict-ssl false
+
 # Instalar dependencias
 RUN npm install
 
