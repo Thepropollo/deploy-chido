@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        nodejs "node" // Asume que tienes configurada una instalación llamada "Node18" en Jenkins
+        nodejs "node" // Asegúrate de que este nombre coincida con tu configuración global de Jenkins
     }
 
     stages {
@@ -14,6 +14,8 @@ pipeline {
 
         stage('Ejecutar tests') {
             steps {
+                // Otorga permisos de ejecución a los binarios locales para evitar el error 127
+                sh 'chmod +x ./node_modules/.bin/*'
                 sh 'npm test'
             }
         }
